@@ -4,10 +4,21 @@ This program will dim the screen for 100 seconds every 30 mins.
 
 Tested on macOS Mojave (10.14), should work on High Sierra (10.13) as well.
 
-## Installing
+## Building
 
 ```console
-$ go install github.com/keepwow/macos-brightness/cmd/eyescare@latest
+$ pwd
+/Users/keepwow/Code/eyescare
+% tree
+.
+├── LICENSE
+├── README.md
+└── cmd
+    └── eyescare
+        └── main.go
+
+3 directories, 3 files
+$ go build -o ~/bin/eyescare cmd/eyescare/main.go
 ```
 
 ## Usage
