@@ -14,6 +14,7 @@ import "C"
 import (
 	"errors"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -68,9 +69,19 @@ func findBuiltin(d []Display) (Display, error) {
 	return Display{}, errors.New("builtin display not found")
 }
 
+func printUsage() {
+	fmt.Println("Usage: eyescare please")
+	fmt.Println("This program dims the screen for 100 seconds every 30 minutes.")
+	fmt.Println("It only runs when there is exactly one argument named 'please'.")
+}
+
 func main() {
-	// brightness := flag.Float64("b", -1, "Set the brightness (between 0 - 100)")
-	// flag.Parse()
+	// Check command-line arguments
+	args := os.Args[1:] // Exclude the program name
+	if len(args) != 1 || args[0] != "please" {
+		printUsage()
+		return
+	}
 
 	for {
 

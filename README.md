@@ -1,13 +1,13 @@
-# macos-brightness
+# Eyescare
 
-Your friendly neighbordhood macOS brightness CLI. Sets the brightness of the builtin display (e.g. on MacBooks).
+This program will dim the screen for 100 seconds every 30 mins.
 
 Tested on macOS Mojave (10.14), should work on High Sierra (10.13) as well.
 
 ## Installing
 
 ```console
-$ go get -u github.com/mafredri/macos-brightness/cmd/brightness
+$ go install github.com/keepwow/macos-brightness/cmd/eyescare@latest
 ```
 
 ## Usage
@@ -15,16 +15,21 @@ $ go get -u github.com/mafredri/macos-brightness/cmd/brightness
 ### Get current brightness
 
 ```console
-$ brightness
-75.66666603088379
+% eyescare
+Usage: eyescare please
+This program dims the screen for 100 seconds every 30 minutes.
+It only runs when there is exactly one argument named 'please'.
+$ eyescare please
+2023-12-08 14:21:59: Current brightness is 29.589844
+...
 ```
 
-### Set brightness percentage
+## Requirement
 
-```console
-$ brightness -b 90.5
-```
+Make sure the screen saver set to at least every 2 mins.
 
-## See also
+`Settings -> Battery -> Turn display off after [2:] minutes.`
 
-- [macos-darkmode](https://github.com/mafredri/macos-darkmode): Simple CLI for controlling macOS Dark Mode via Apples private API
+## Thanks to
+
+- [macos-brightness](https://github.com/mafredri/macos-brightness): Your friendly neighbordhood macOS brightness CLI. Sets the brightness of the builtin display (e.g. on MacBooks).
