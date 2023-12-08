@@ -13,9 +13,8 @@ import "C"
 
 import (
 	"errors"
-	"flag"
 	"fmt"
-	"os"
+	"time"
 )
 
 type Display struct {
@@ -70,23 +69,45 @@ func findBuiltin(d []Display) (Display, error) {
 }
 
 func main() {
-	brightness := flag.Float64("b", -1, "Set the brightness (between 0 - 100)")
-	flag.Parse()
+	// brightness := flag.Float64("b", -1, "Set the brightness (between 0 - 100)")
+	// flag.Parse()
 
-	d, err := displays()
-	if err != nil {
-		panic(err)
+	for {
+
+		d, err := displays()
+		if err != nil {
+			panic(err)
+		}
+
+		bd, err := findBuiltin(d)
+		if err != nil {
+			panic(err)
+		}
+
+		// if *brightness == -1 {
+		// 	fmt.Println(bd.Brightness())
+		// 	os.Exit(0)
+		// }
+
+		// bd.SetBrightness(*brightness)
+
+		t := time.Now()
+		// Record the current brightness
+		currentBrightness := bd.Brightness()
+		fmt.Printf("%s: Current brightness is %f\n", t.Format("2006-01-02 15:04:05"), currentBrightness)
+
+		// Dim the screen
+		// fmt.Println("Dimming the screen...")
+		bd.SetBrightness(0) // Set brightness to 0%
+
+		// Wait for 100 seconds
+		time.Sleep(100 * time.Second)
+
+		// Restore the brightness
+		// fmt.Println("Restoring the brightness...")
+		bd.SetBrightness(currentBrightness) // Restore to the recorded brightness
+
+		// Wait for 30 minutes
+		time.Sleep(30 * time.Minute)
 	}
-
-	bd, err := findBuiltin(d)
-	if err != nil {
-		panic(err)
-	}
-
-	if *brightness == -1 {
-		fmt.Println(bd.Brightness())
-		os.Exit(0)
-	}
-
-	bd.SetBrightness(*brightness)
 }
